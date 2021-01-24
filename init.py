@@ -2,34 +2,34 @@ import numpy as np
 
 class initialization:
     '''
-    <spanclass="font-weight-bold comment">
+    
     " This is the initialization class which will initialize the weights and biases for the layers of any model . "
-    </span>
+    
     '''
     def __init__(self,dimension_layers):
         self.dimension_layers = dimension_layers
         '''
-        <spanclass="font-weight-bold comment">
+        
         " The Constructor of this class takes the a list contains the number of hidden units in each layer ."
         
         :type dimension_layers: List . 
         :param dimension_layers: list of the number of hidden units in each hidden layer .
         
-        </span>
+        
         '''
 
 
     def initialize_parameters(self): # [6,5,9,1]
 
         '''
-         <spanclass="font-weight-bold comment">
+         
          " This function will initialize a random values for weights and zeros for biases using the
                             dimension_layers list . "
 
          :type parameters: dictionary .
          :param parameters: this dictionary contains the weights and biases with the same dimension as
                                 each layers' dimension .
-        </span>
+        
         '''
         parameters = {}
         np.random.seed(3)
