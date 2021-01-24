@@ -54,9 +54,8 @@ class regularization:
                 cross_entropy_cost = multiclass_loss(Y,prediction).cost()  # This gives you the cross-entropy part of the cost
         for i in range(1,temp):
            x=+np.sum(np.square (parameters["W"+str(i)]))
-        ### START CODE HERE ### (approx. 1 line)
         L2_regularization_cost = lambd / (2 * m) * x
-        ### END CODER HERE ###
+        
 
         cost = cross_entropy_cost + L2_regularization_cost
 
