@@ -70,8 +70,8 @@ class relu:
         dZ = np.array(dLA, copy=True)  # just converting dz to a correct object.
 
         # When z <= 0, you should set dz to 0 as well.
-        dZ[Z<=0] = 0
-        #dZ = np.where(Z>0,1,0)
+        #dZ[Z<=0] = 0
+        dZ = np.where(Z>0,1,0)
         assert (dZ.shape == Z.shape)
         return dZ
       #  print(type(Z))

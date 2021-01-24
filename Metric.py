@@ -1,17 +1,17 @@
 import numpy as np
-from sklearn.metrics import confusion_matrix, f1_score, accuracy_score, precision_score, recall_score
 import pandas as pd
 from forward_model import forward_model
 
 class evaluation_metrics:
-    def __init__(self, labels, input,parameters):
+    def __init__(self, labels, input,parameters,activation_functions):
         self.input = input
         self.Y_true = labels
         self.parameters=parameters
+        self.activations=activation_functions
 #Accuracy = (TP+TN)/(TP+FP+FN+TN)
     def confusionMatrix(self):
         y_hat=[]
-        predictions,packet_of_packets=forward_model().forward_model(self.input,self.parameters)
+        predictions,packet_of_packets=forward_model().forward_model(self.input,self.parameters,self.activations)
         predictions=predictions.T
        # print(predictions.shape)
        # print(predictions)

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib as plt
 import pickle
 import os
 class dataset:
@@ -15,6 +16,7 @@ class dataset:
             testing_set = np.array(testing_set)
             training_labels = np.array(training_set[:, 0]) # all rows of first columns
             training_examples = np.array(training_set[:, 1:]) #all data except first column
+
             training_labels = np.atleast_2d(training_labels)
             testing_labels = np.array(testing_set[:, 0])
             testing_examples = np.array(testing_set[:, 1:])

@@ -1,10 +1,20 @@
 import numpy as np
 class momentum:
+    '''
+    " The class concerned The momentum optimization "
+    '''
+
     def __init__(self,parameters):
+        '''
+        :param parameters: the Weights and biases of The current model
+        '''
         self.parameters=parameters
 
 
     def velocity_preparation(self):
+        '''
+        :return: Velocity parameter for weights and biases as to update the parameters using momentum GD
+        '''
         weights = len(self.parameters) // 2  # number of layers in the neural networks
         v = {}
         # Initialize velocity
@@ -15,6 +25,14 @@ class momentum:
 
 
     def update_with_momentum(self,velocity,learning_rate,exponentially_weighted_average_parameter,gradients):
+        '''
+        :param velocity: Velocity of the gradient with momentum
+        :param learning_rate: the learning rate
+        :param exponentially_weighted_average_parameter: Beta , the momentum hyperparameter
+        :param gradients: dW , dB , the gradients of the weights and biases of each layer
+        :return: parameters: updated weights and biases
+                 velocity : updated velocity to be used in the next iteration
+        '''
         L = len(self.parameters) // 2  # number of layers in the neural networks
         for l in range(L):
             # compute velocities
@@ -30,11 +48,22 @@ class momentum:
 
 
 class ADAM:
+    '''
+    " The class concerned ADAM optimization technique "
+    '''
     def __init__(self,parameters):
+        '''
+        :param parameters: The weights and biases for each layer before any updates
+        '''
         self.parameters=parameters
 
 
     def adam_preparation(self):
+        '''
+        " Initialization of ADAM optimization's parameters"
+        :return: EWA : exponentially weighted average parameter
+                 RMS : Root mean square prop parameter
+        '''
         L = len(self.parameters) // 2  # number of layers in the neural networks
         EWA = {}
         RMS = {}
@@ -50,7 +79,21 @@ class ADAM:
 
         return EWA, RMS
 
-    def update_with_adam(self,EWA,RMS,learning_rate,parameters,gradients,epoch_num,frist_beta=0.9,second_beta=0.99,epsilon=1e-8,):
+    def update_with_adam(self,EWA,RMS,learning_rate,parameters,gradients,epoch_num,frist_beta=0.9,second_beta=0.995,epsilon=1e-8,):
+        '''
+        :param EWA: Exponentially weighted average parameter
+        :param RMS: RMS prop parameter
+        :param learning_rate: the learning rate
+        :param parameters: weights and biases before update
+        :param gradients: the Gradients of weights and biases for the current model's layers
+        :param epoch_num: the Epoch number
+        :param frist_beta: Beta_1 , the first hyperparameter for Exponentially weighted average's parameter
+        :param second_beta:Beta_2 , the 2nd hyperparameter for RMS prop's parameter
+        :param epsilon: The safety margin as to not divide by zero
+        :return: :param parameters : The updated parameters of the current model
+                 :param: EWA : the updated Exponentially weighted average parameters
+                 :param RMS : the updated RMS prop parameters
+        '''
 
         L = len(parameters) // 2  # number of layers in the neural networks
         EWA_corrected = {}  # Initializing first moment estimate, python dictionary

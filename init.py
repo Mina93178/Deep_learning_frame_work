@@ -32,13 +32,12 @@ class initialization:
         </span>
         '''
         parameters = {}
-        #np.random.seed(3)
+        np.random.seed(3)
         for layer in range(1, len(self.dimension_layers)):
             #parameters['W' + str(l)] = np.random.normal(0,1,(self.dimension_layers[l], self.dimension_layers[l - 1])) * 0.01
-            parameters['W' + str(layer)] = np.random.randn(self.dimension_layers[layer], self.dimension_layers[layer - 1]) *0.1
+            parameters['W' + str(layer)] = np.random.randn(self.dimension_layers[layer], self.dimension_layers[layer - 1]) *0.01
             parameters['b' + str(layer)] = np.zeros((self.dimension_layers[layer], 1))
-            assert (parameters['W' + str(layer)].shape == (self.dimension_layers[layer], self.dimension_layers[layer - 1]))
-            assert (parameters['b' + str(layer)].shape == (self.dimension_layers[layer], 1))
+
 
         return parameters
 

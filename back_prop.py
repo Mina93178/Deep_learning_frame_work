@@ -42,10 +42,12 @@ class backward_model:
         linear_packet, act_packet = packet_of_packets
 
         if activation_type == "relu":
+            #print("hi")
             temp = activations.relu()
             dZ = temp.backaward(delta_A, act_packet)    # we have to implement this relu backward function
             dA_prev, dW, db = self.identity_backward(dZ,linear_packet,lambd)
         elif activation_type == "sigmoid":
+            #print("hi")
             temp = activations.Sigmoid()
             dZ = temp.backward(delta_A, act_packet)
             dA_prev, dW, db = self.identity_backward(dZ,linear_packet,lambd)

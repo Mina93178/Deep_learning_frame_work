@@ -5,10 +5,11 @@ class model_backward_general:
     '''
     " The Class which is concerned with combining the back propagation functions to form an integrated backprop model ."
     '''
-    def __init__(self,Predictions,true_label,packet_of_packets,loss_function,lambd):
+    def __init__(self,Predictions,true_label,packet_of_packets,loss_function,lambd,activation_functions):
         '''
         :param Predictions: Y-hat --> the output of the activation function
         :param true_label: the true classes' values (labels)
+        :param activation_functions : the type of activation function in each layer
         :param packet_of_packets: Tuple of 2 elements which will be used in backward propagation :
                      1- linear packer : contains ( input , weights , biases ) of the current layer
                      2- activation packet : contains ( Z ) which is the input to the activation function
@@ -17,6 +18,7 @@ class model_backward_general:
         :return : gradients of weights and biases
         '''
         self.lambd=lambd
+        self.activation_functions = activation_functions
         self.predictions = Predictions
         self.Y = true_label
         self.packet_of_packets=packet_of_packets
@@ -54,7 +56,7 @@ class model_backward_general:
             # lth layer: (RELU -> LINEAR) gradients.
             # Inputs: "grads["dA" + str(l + 1)], current_cache". Outputs: "grads["dA" + str(l)] , grads["dW" + str(l + 1)] , grads["db" + str(l + 1)]
             current_cache = self.packet_of_packets[l]
-            dA_prev_of_l, dW_of_l, db_of_l = temp.activation_backward(gradients["dA" + str(l + 1)], current_cache, "sigmoid",self.lambd)
+            dA_prev_of_l, dW_of_l, db_of_l = temp.activation_backward(gradients["dA" + str(l + 1)], current_cache, self.activation_functions[l-1],self.lambd)
             gradients["dA" + str(l)] = dA_prev_of_l
             gradients["dW" + str(l + 1)] = dW_of_l
             gradients["db" + str(l + 1)] = db_of_l
